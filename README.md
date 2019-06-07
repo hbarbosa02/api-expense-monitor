@@ -1,1 +1,1 @@
-# graphql-express-sequelize
+# Expense Monitor
