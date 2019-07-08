@@ -25,7 +25,7 @@ module.exports = {
       },
       name: {
         allowNull: false,
-        type: DataTypes.STRING(30)
+        type: DataTypes.STRING(25)
       },
       description: {
         allowNull: true,

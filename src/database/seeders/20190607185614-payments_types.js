@@ -6,7 +6,7 @@ module.exports = {
       "payments_types",
       [
         {
-          name: "Depito",
+          name: "Debito",
           description: "Débito em conta."
         },
         {
