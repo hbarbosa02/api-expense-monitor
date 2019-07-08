@@ -21,7 +21,7 @@ module.exports = {
         allowNull: false,
         type: DataTypes.BIGINT,
         references: {
-          model: "payments_types",
+          model: "earnings_types",
           key: "id"
         }
       },
