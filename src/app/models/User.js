@@ -46,7 +46,8 @@ module.exports = (sequelize, DataTypes) => {
           }
         },
         afterCreate: async user => {
-          sequelize.models.UserWallet.create({ user_id: user.id });
+          const { UserWallet } = sequelize.models;
+          UserWallet.create({ user_id: user.id });
         }
       }
     },
@@ -63,13 +64,6 @@ module.exports = (sequelize, DataTypes) => {
     return {
       token: jwt.sign({ id: this.id }, process.env.JWT_TOKEN)
     };
-  };
-
-  User.associate = models => {
-    User.hasOne(models.UserWallet, {
-      foreignKey: "user_id",
-      as: "wallet"
-    });
   };
 
   return User;

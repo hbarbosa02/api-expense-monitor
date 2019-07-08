@@ -23,13 +23,5 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
-  Earning.associate = models => {
-    Earning.belongsTo(models.User, { foreginKey: "user_id" });
-  };
-
-  Earning.associate = models => {
-    Earning.belongsTo(models.EarningType, { foreginKey: "type_id" });
-  };
-
   return Earning;
 };

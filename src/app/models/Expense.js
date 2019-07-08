@@ -28,13 +28,5 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
-  Expense.associate = models => {
-    Expense.belongsTo(models.User, { foreginKey: "user_id" });
-  };
-
-  Expense.associate = models => {
-    Expense.belongsTo(models.PaymentType, { foreginKey: "type_id" });
-  };
-
   return Expense;
 };

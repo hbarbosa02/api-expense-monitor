@@ -2,7 +2,10 @@ module.exports = (sequelize, DataTypes) => {
   const UserWallet = sequelize.define(
     "UserWallet",
     {
-      user_id: DataTypes.BIGINT,
+      user_id: {
+        type: DataTypes.BIGINT,
+        primaryKey: true
+      },
       amount: DataTypes.FLOAT,
       available: DataTypes.FLOAT,
       spent: DataTypes.FLOAT
@@ -11,9 +14,6 @@ module.exports = (sequelize, DataTypes) => {
       tableName: "users_wallet"
     }
   );
-  UserWallet.associate = models => {
-    UserWallet.belongsTo(models.User, { foreginKey: "user_id" });
-  };
 
   return UserWallet;
 };
