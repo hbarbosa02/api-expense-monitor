@@ -68,6 +68,10 @@ module.exports = {
         allowNull: false,
         type: DataTypes.FLOAT,
         defaultValue: 0.0
+      },
+      description: {
+        allowNull: true,
+        type: DataTypes.STRING(100)
       }
     });
   },
