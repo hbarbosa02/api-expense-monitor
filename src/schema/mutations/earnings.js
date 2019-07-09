@@ -1,6 +1,7 @@
 const { Earning } = require("../../app/models");
 const EarningsType = require("../types/earnings");
-const { EarningsInput } = require("../inputs/earnings");
+const { DeleteInput } = require("../inputs/delete");
+const { EarningsCreateInput } = require("../inputs/earnings");
 const { compose, authenticated } = require("../../../utils/please");
 
 const EarningsMutations = {
@@ -8,7 +9,7 @@ const EarningsMutations = {
     type: EarningsType,
     description: "Register User Earnings",
     args: {
-      input: { type: EarningsInput }
+      input: { type: EarningsCreateInput }
     },
     resolve: compose(authenticated)((_, { input }, ctx) => {
       const { value, user, type } = input;
@@ -19,6 +20,18 @@ const EarningsMutations = {
         net_value: value,
         description: input.description || ""
       });
+    })
+  },
+  earningsDelete: {
+    type: EarningsType,
+    description: "Register User Earnings",
+    args: {
+      input: { type: DeleteInput }
+    },
+    resolve: compose(authenticated)((_, { input }, ctx) => {
+      const { id } = input;
+
+      return Earning.destroy({ where: { id, user_id: ctx.user.id } });
     })
   }
 };

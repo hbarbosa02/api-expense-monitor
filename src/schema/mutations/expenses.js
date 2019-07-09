@@ -1,4 +1,5 @@
 const ExpensesType = require("../types/expenses");
+const { DeleteInput } = require("../inputs/delete");
 const { ExpensesInput } = require("../inputs/expenses");
 const { Expense, UserWallet } = require("../../app/models");
 const { compose, authenticated } = require("../../../utils/please");
@@ -28,6 +29,18 @@ const ExpensesMutations = {
         percentage: percent,
         description: input.description || ""
       });
+    })
+  },
+  expensesDelete: {
+    type: ExpensesType,
+    description: "Register User Expenses",
+    args: {
+      input: { type: DeleteInput }
+    },
+    resolve: compose(authenticated)((_, { input }, ctx) => {
+      const { id } = input;
+
+      return Expense.destroy({ where: { id, user_id: ctx.user.id } });
     })
   }
 };

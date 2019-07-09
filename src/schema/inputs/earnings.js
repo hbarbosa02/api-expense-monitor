@@ -6,8 +6,8 @@ const {
   GraphQLInputObjectType
 } = require("graphql");
 
-exports.EarningsInput = new GraphQLInputObjectType({
-  name: "EarningsInput",
+exports.EarningsCreateInput = new GraphQLInputObjectType({
+  name: "EarningsCreate",
   fields: {
     value: { type: new GraphQLNonNull(GraphQLFloat) },
     user: { type: new GraphQLNonNull(GraphQLID) },
