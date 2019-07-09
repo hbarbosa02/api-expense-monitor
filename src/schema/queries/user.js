@@ -1,5 +1,7 @@
 const { GraphQLNonNull, GraphQLID, GraphQLList } = require("graphql");
 
+const { compose, authenticated } = require("../../../utils/please");
+
 const UserType = require("../types/user");
 const UserWalletType = require("../types/wallet");
 const ExpensesType = require("../types/expenses");
@@ -11,34 +13,28 @@ const UserQueries = {
   user: {
     type: UserType,
     description: "Get User",
-    args: {
-      id: { type: new GraphQLNonNull(GraphQLID) }
-    },
-    resolve: (_, { id }, ctx) => User.findByPk(id)
+    resolve: compose(authenticated)((_, __, ctx) => User.findByPk(ctx.user.id))
   },
   wallet: {
     type: UserWalletType,
     description: "Get User Wallet",
-    args: {
-      id: { type: new GraphQLNonNull(GraphQLID) }
-    },
-    resolve: (_, { id }, ctx) => UserWallet.findByPk(id)
+    resolve: compose(authenticated)((_, __, ctx) =>
+      UserWallet.findByPk(ctx.user.id)
+    )
   },
   expenses: {
     type: new GraphQLList(ExpensesType),
     description: "Get User Expenses",
-    args: {
-      id: { type: new GraphQLNonNull(GraphQLID) }
-    },
-    resolve: (_, { id }, ctx) => Expense.findAll({ where: { user_id: id } })
+    resolve: compose(authenticated)((_, __, ctx) =>
+      Expense.findAll({ where: { user_id: ctx.user.id } })
+    )
   },
   earnings: {
     type: new GraphQLList(EarningsType),
     description: "Get User Earnings",
-    args: {
-      id: { type: new GraphQLNonNull(GraphQLID) }
-    },
-    resolve: (_, { id }, ctx) => Expense.findAll({ where: { user_id: id } })
+    resolve: compose(authenticated)((_, __, ctx) =>
+      Expense.findAll({ where: { user_id: ctx.user.id } })
+    )
   }
 };
 
