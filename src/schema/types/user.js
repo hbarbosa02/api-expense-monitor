@@ -1,6 +1,6 @@
 const {
-  GraphQLNonNull,
   GraphQLObjectType,
+  GraphQLNonNull,
   GraphQLString,
   GraphQLID
 } = require("graphql");
@@ -13,13 +13,13 @@ const UserType = new GraphQLObjectType({
   name: "User",
   fields: () => ({
     id: { type: new GraphQLNonNull(GraphQLID) },
-    name: { type: new GraphQLNonNull(GraphQLString) },
-    email: { type: new GraphQLNonNull(GraphQLString) },
-    password: { type: new GraphQLNonNull(GraphQLString) },
     wallet: {
       type: UserWalletType,
-      resolve: obj => UserWallet.findOne({ where: { user_id: obj.id } })
-    }
+      resolve: obj => UserWallet.findByPk(obj.id)
+    },
+    name: { type: new GraphQLNonNull(GraphQLString) },
+    email: { type: new GraphQLNonNull(GraphQLString) },
+    password: { type: new GraphQLNonNull(GraphQLString) }
   })
 });
 

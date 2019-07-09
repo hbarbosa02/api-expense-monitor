@@ -24,7 +24,23 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     {
-      tableName: "expenses"
+      tableName: "expenses",
+      hooks: {
+        afterCreate: async ({ user_id: user, net_value: value }) => {
+          const { UserWallet } = sequelize.models;
+          const where = { where: { user_id: user } };
+
+          const { spent, available } = await UserWallet.findByPk(user);
+
+          UserWallet.update(
+            {
+              spent: spent - value,
+              available: available - value
+            },
+            where
+          );
+        }
+      }
     }
   );
 

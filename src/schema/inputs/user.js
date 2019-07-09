@@ -12,3 +12,11 @@ exports.RegisterInput = new GraphQLInputObjectType({
     password: { type: new GraphQLNonNull(GraphQLString) }
   }
 });
+
+exports.LoginInput = new GraphQLInputObjectType({
+  name: "LoginInput",
+  fields: {
+    email: { type: new GraphQLNonNull(GraphQLString) },
+    password: { type: new GraphQLNonNull(GraphQLString) }
+  }
+});

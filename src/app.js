@@ -3,6 +3,8 @@ require("dotenv").config();
 const express = require("express");
 const graphqlHTTP = require("express-graphql");
 
+const authMiddleware = require("./app/middlewares/auth");
+
 const schema = require("./schema");
 
 class AppController {
@@ -14,7 +16,9 @@ class AppController {
     this.exception();
   }
 
-  middlewares() {}
+  middlewares() {
+    this.express.use(authMiddleware);
+  }
 
   routes() {
     this.express.use(
