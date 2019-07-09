@@ -4,7 +4,9 @@ const Mutations = new GraphQLObjectType({
   name: "Mutation",
   description: "These are the things we can list",
   fields: {
-    ...require("./system")
+    ...require("./system"),
+    ...require("./earnings"),
+    ...require("./expenses")
   }
 });
 

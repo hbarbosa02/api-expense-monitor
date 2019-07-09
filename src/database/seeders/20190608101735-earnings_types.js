@@ -6,12 +6,8 @@ module.exports = {
       "earnings_types",
       [
         {
-          name: "Rendimento",
-          description: "Valor de rendimento em fundos de investimento."
-        },
-        {
-          name: "Salário",
-          description: "Salário recebido."
+          name: "Deposito",
+          description: "Valor depositado na conta."
         }
       ],
       {}
