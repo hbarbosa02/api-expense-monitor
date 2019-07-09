@@ -2,8 +2,9 @@ const { GraphQLNonNull, GraphQLID, GraphQLList } = require("graphql");
 
 const UserType = require("../types/user");
 const UserWalletType = require("../types/wallet");
+const ExpensesType = require("../types/expenses");
 
-const { User, UserWallet } = require("../../app/models");
+const { User, UserWallet, Expense } = require("../../app/models");
 
 const UserQueries = {
   user: {
@@ -21,6 +22,14 @@ const UserQueries = {
       id: { type: new GraphQLNonNull(GraphQLID) }
     },
     resolve: (_, { id }, ctx) => UserWallet.findByPk(id)
+  },
+  expenses: {
+    type: new GraphQLList(ExpensesType),
+    description: "Get User Expenses",
+    args: {
+      id: { type: new GraphQLNonNull(GraphQLID) }
+    },
+    resolve: (_, { id }, ctx) => Expense.findAll({ where: { user_id: id } })
   }
 };
 
