@@ -30,9 +30,15 @@ module.exports = (sequelize, DataTypes) => {
           const { UserWallet } = sequelize.models;
           const where = { where: { user_id: user } };
 
-          const { available } = await UserWallet.findByPk(user);
+          const { spent, available } = await UserWallet.findByPk(user);
 
-          UserWallet.update({ available: available - value }, where);
+          UserWallet.update(
+            {
+              spent: spent - value,
+              available: available - value
+            },
+            where
+          );
         }
       }
     }
