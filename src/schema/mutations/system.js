@@ -1,4 +1,4 @@
-const { RegisterInput } = require("../inputs/user");
+const { Register } = require("../inputs/user");
 const { User } = require("../../app/models");
 const UserType = require("../types/user");
 
@@ -7,7 +7,7 @@ const UserMutations = {
     type: UserType,
     description: "Sing up user",
     args: {
-      input: { type: RegisterInput }
+      input: { type: Register }
     },
     resolve: (_, { input }, ctx) => {
       const { name, email, password } = input;

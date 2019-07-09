@@ -4,7 +4,7 @@ const {
   GraphQLInputObjectType
 } = require("graphql");
 
-exports.RegisterInput = new GraphQLInputObjectType({
+exports.Register = new GraphQLInputObjectType({
   name: "Register",
   fields: {
     name: { type: new GraphQLNonNull(GraphQLString) },
